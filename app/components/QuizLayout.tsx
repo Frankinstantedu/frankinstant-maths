@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import { ReactNode } from "react";
+import Link from "next/link";
 
 interface QuizLayoutProps {
   title: string;
@@ -8,7 +11,17 @@ interface QuizLayoutProps {
   score: number;
   question: string;
   message?: string;
-  children: React.ReactNode;
+  children: ReactNode;
+  
+  // New props for centralized modals
+  showFeedbackModal?: boolean;
+  isCorrect?: boolean;
+  correctAnswer?: string;
+  explanation?: string;
+  onNextQuestion?: () => void;
+  
+  showEndModal?: boolean;
+  onRestartQuiz?: () => void;
 }
 
 export default function QuizLayout({
@@ -19,50 +32,130 @@ export default function QuizLayout({
   score,
   question,
   children,
+  showFeedbackModal,
+  isCorrect,
+  correctAnswer,
+  explanation,
+  onNextQuestion,
+  showEndModal,
+  onRestartQuiz,
 }: QuizLayoutProps) {
-  // Calculate progress percentage
-  const progressPercent = (questionNumber / totalQuestions) * 100;
-
   return (
-    <main className="min-h-screen bg-slate-100 p-4 sm:p-8 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-6 border-2 border-slate-200">
-        
-        {/* TOP BAR: Title & Stars */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-3xl">{icon}</span>
-            <h1 className="text-xl font-bold text-slate-800">{title}</h1>
-          </div>
-
-          {/* ⭐ Animated Star Score Pill */}
-          <div className="bg-amber-100 text-amber-900 font-extrabold px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5 shadow-sm border border-amber-300">
-            <span className="text-base animate-bounce">⭐</span>
-            <span>{score} Stars</span>
-          </div>
-        </div>
-
-        {/* 📊 PROGRESS BAR */}
-        <div className="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden border border-slate-200">
-          <div
-            className="bg-blue-600 h-3 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-
-        {/* QUESTION DISPLAY */}
-        <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6 text-center mb-6">
-          <p className="text-sm font-semibold text-slate-500 mb-1">
+    <main className="min-h-screen bg-slate-100 p-4 sm:p-8 flex flex-col items-center">
+      <div className="max-w-xl w-full">
+        {/* Top Navigation & Header */}
+        <div className="flex items-center justify-between mb-6">
+          <Link
+            href="/year2"
+            className="text-sm font-bold text-slate-500 hover:text-slate-800 transition"
+          >
+            ← Back to Year 2 Hub
+          </Link>
+          <span className="text-xs font-bold px-3 py-1 bg-white rounded-full border border-slate-200 text-slate-700 shadow-sm">
             Question {questionNumber} of {totalQuestions}
-          </p>
-          <h2 className="text-3xl font-extrabold text-slate-900">
-            {question}
-          </h2>
+          </span>
         </div>
 
-        {/* QUIZ INPUT & BUTTONS */}
-        {children}
+        {/* Quiz Card Container */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border-2 border-slate-200">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl">{icon}</span>
+            <h1 className="text-xl font-extrabold text-slate-900">{title}</h1>
+          </div>
 
+          {/* Progress Bar */}
+          <div className="w-full bg-slate-100 h-3 rounded-full mb-6 overflow-hidden">
+            <div
+              className="bg-indigo-600 h-full transition-all duration-300 rounded-full"
+              style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+            />
+          </div>
+
+          {/* Question Text */}
+          <div className="bg-indigo-50/60 border border-indigo-100 rounded-2xl p-6 mb-6">
+            <p className="text-lg sm:text-xl font-semibold text-slate-800 whitespace-pre-line leading-relaxed">
+              {question}
+            </p>
+          </div>
+
+          {/* Options / Interactive Area (Children) */}
+          {children}
+        </div>
       </div>
+
+      {/* --- CENTRALIZED FEEDBACK POP-UP (WITH ANIMATIONS) --- */}
+      {showFeedbackModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div
+            className={`bg-white rounded-2xl p-6 text-center shadow-2xl max-w-sm w-full border-4 ${
+              isCorrect
+                ? "border-emerald-500 animate-pop-in"
+                : "border-amber-500 animate-shake"
+            }`}
+          >
+            <div className="text-6xl mb-3">{isCorrect ? "🎉" : "💡"}</div>
+
+            <h3
+              className={`text-2xl font-bold mb-2 ${
+                isCorrect ? "text-emerald-600" : "text-amber-700"
+              }`}
+            >
+              {isCorrect ? "Spot On!" : "Nice Try!"}
+            </h3>
+
+            <p className="text-gray-700 text-lg mb-6">
+              {isCorrect ? (
+                "Great work!"
+              ) : (
+                <>
+                  Correct Answer:{" "}
+                  <span className="font-bold text-slate-900 block mt-1 text-xl">
+                    {correctAnswer}
+                  </span>
+                  <span className="text-sm text-slate-500 mt-2 block">
+                    {explanation}
+                  </span>
+                </>
+              )}
+            </p>
+
+            <button
+              onClick={onNextQuestion}
+              className="w-full py-3 px-6 rounded-xl font-bold text-white text-lg bg-emerald-600 hover:bg-emerald-700 transition-transform active:scale-95 cursor-pointer"
+            >
+              {questionNumber === totalQuestions
+                ? "See Final Score 🏆"
+                : "Next Question ➔"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* --- CENTRALIZED END OF QUIZ POP-UP (WITH ANIMATIONS) --- */}
+      {showEndModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl p-8 text-center shadow-2xl max-w-md w-full border-4 border-emerald-500 animate-pop-in">
+            <div className="text-7xl mb-4 animate-bounce">
+              {score >= 8 ? "🏆" : score >= 5 ? "🌟" : "💪"}
+            </div>
+            <h2 className="text-3xl font-extrabold text-slate-900 mb-2">
+              Quiz Completed!
+            </h2>
+            <p className="text-lg text-gray-600 mb-4">
+              You scored{" "}
+              <span className="font-bold text-emerald-600">{score}</span> out of{" "}
+              <span className="font-bold">{totalQuestions}</span>!
+            </p>
+
+            <button
+              onClick={onRestartQuiz}
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-lg transition-transform active:scale-95 cursor-pointer"
+            >
+              Play Again 🚀
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

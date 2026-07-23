@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const FUTURE_YEARS = [
-  { year: "Year 2", icon: "📗", color: "border-emerald-200" },
   { year: "Year 3", icon: "📙", color: "border-amber-200" },
   { year: "Year 4", icon: "📕", color: "border-rose-200" },
   { year: "Year 5", icon: "📒", color: "border-yellow-200" },
@@ -55,7 +54,31 @@ export default function HomePage() {
             </button>
           </Link>
 
-          {/* YEARS 2 - 8 (COMING SOON CARDS) */}
+          {/* YEAR 2 (ACTIVE CARD) */}
+          <Link
+            href="/year2"
+            className="group relative bg-white rounded-3xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 border-2 border-emerald-400 flex flex-col justify-between"
+          >
+            <span className="absolute top-4 right-4 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-300">
+              Active ✨
+            </span>
+
+            <div className="space-y-4 text-center mt-2">
+              <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
+                📗
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">Year 2</h2>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Times tables (2, 5, 10), fractions, place value, and subtraction.
+              </p>
+            </div>
+
+            <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md group-hover:shadow-emerald-200 transition-all text-sm">
+              Start Learning ➔
+            </button>
+          </Link>
+
+          {/* YEARS 3 - 8 (COMING SOON CARDS) */}
           {FUTURE_YEARS.map((item) => (
             <div
               key={item.year}
