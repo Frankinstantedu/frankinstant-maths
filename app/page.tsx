@@ -1,115 +1,108 @@
 import Link from "next/link";
 
-const FUTURE_YEARS = [
-  { year: "Year 3", icon: "📙", color: "border-amber-200" },
-  { year: "Year 4", icon: "📕", color: "border-rose-200" },
-  { year: "Year 5", icon: "📒", color: "border-yellow-200" },
-  { year: "Year 6", icon: "📓", color: "border-purple-200" },
-  { year: "Year 7", icon: "📔", color: "border-cyan-200" },
-  { year: "Year 8", icon: "📚", color: "border-slate-200" },
-];
+export default function Home() {
+  const years = [
+    {
+      title: "Year 1 Maths",
+      age: "Age 5-6",
+      icon: "🎈",
+      desc: "Counting to 100, basic addition/subtraction, 2D/3D shapes, and time.",
+      href: "/year1",
+      color: "border-sky-200 hover:border-sky-400 bg-white shadow-xs",
+      btnColor: "bg-sky-600 hover:bg-sky-700",
+    },
+    {
+      title: "Year 2 Maths",
+      age: "Age 6-7",
+      icon: "🌟",
+      desc: "Place value up to 100, 2x 5x 10x tables, fractions, and money.",
+      href: "/year2",
+      color: "border-emerald-200 hover:border-emerald-400 bg-white shadow-xs",
+      btnColor: "bg-emerald-600 hover:bg-emerald-700",
+    },
+    {
+      title: "Year 3 Maths",
+      age: "Age 7-8",
+      icon: "📐",
+      desc: "3-digit numbers, 3x 4x 8x tables, column addition, and telling time.",
+      href: "/year3",
+      color: "border-amber-200 hover:border-amber-400 bg-white shadow-xs",
+      btnColor: "bg-amber-600 hover:bg-amber-700",
+    },
+    {
+      title: "Year 4 Maths",
+      age: "Age 8-9",
+      icon: "🚀",
+      desc: "4-digit place value, 11x & 12x tables, decimals, perimeter, and 24-hr time.",
+      href: "/year4",
+      color: "border-purple-200 hover:border-purple-400 bg-white shadow-xs",
+      btnColor: "bg-purple-600 hover:bg-purple-700",
+    },
+    {
+      title: "Year 5 Maths",
+      age: "Age 9-10",
+      icon: "⚡",
+      desc: "6-digit place value, Roman numerals, prime numbers, volume, and statistics.",
+      href: "/year5",
+      color: "border-rose-200 hover:border-rose-400 bg-white shadow-xs",
+      btnColor: "bg-rose-600 hover:bg-rose-700",
+    },
+  ];
 
-export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 via-indigo-50/50 to-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <main className="min-h-screen bg-slate-50 p-4 sm:p-6 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+      <div className="max-w-4xl mx-auto w-full pt-2">
         
-        {/* --- HERO HEADER --- */}
-        <header className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 font-semibold px-4 py-1.5 rounded-full text-sm shadow-sm">
-            🚀 Interactive Maths Learning
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight">
-            FrankInstant <span className="text-blue-600">Edu</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
-            Choose your year group to start practicing interactive math exercises!
-          </p>
-        </header>
-
-        {/* --- YEAR GROUP CARDS GRID --- */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Stylish Brand Header */}
+        <div className="text-center mb-8">
+          <span className="inline-block text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 shadow-2xs">
+            ✨ Interactive Learning Portal
+          </span>
           
-          {/* YEAR 1 (ACTIVE CARD) */}
-          <Link
-            href="/year1"
-            className="group relative bg-white rounded-3xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 border-2 border-blue-400 flex flex-col justify-between"
-          >
-            <span className="absolute top-4 right-4 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-300">
-              Active ✨
-            </span>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-2">
+            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600">Frankinstant-Edu</span>
+          </h1>
+          
+          <p className="text-slate-600 text-sm sm:text-base font-medium max-w-xl mx-auto italic">
+            &ldquo;Building confidence and mastery, one equation at a time.&rdquo;
+          </p>
+        </div>
 
-            <div className="space-y-4 text-center mt-2">
-              <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
-                📘
-              </div>
-              <h2 className="text-2xl font-bold text-slate-800">Year 1</h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Addition, subtraction, time, money, and measurement practice.
-              </p>
-            </div>
-
-            <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md group-hover:shadow-blue-200 transition-all text-sm">
-              Start Learning ➔
-            </button>
-          </Link>
-
-          {/* YEAR 2 (ACTIVE CARD) */}
-          <Link
-            href="/year2"
-            className="group relative bg-white rounded-3xl p-6 shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 border-2 border-emerald-400 flex flex-col justify-between"
-          >
-            <span className="absolute top-4 right-4 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-300">
-              Active ✨
-            </span>
-
-            <div className="space-y-4 text-center mt-2">
-              <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
-                📗
-              </div>
-              <h2 className="text-2xl font-bold text-slate-800">Year 2</h2>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Times tables (2, 5, 10), fractions, place value, and subtraction.
-              </p>
-            </div>
-
-            <button className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md group-hover:shadow-emerald-200 transition-all text-sm">
-              Start Learning ➔
-            </button>
-          </Link>
-
-          {/* YEARS 3 - 8 (COMING SOON CARDS) */}
-          {FUTURE_YEARS.map((item) => (
+        {/* Year Selection Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8">
+          {years.map((year) => (
             <div
-              key={item.year}
-              className={`relative bg-white/70 backdrop-blur-sm rounded-3xl p-6 shadow-sm border ${item.color} flex flex-col justify-between opacity-70 hover:opacity-95 transition-opacity`}
+              key={year.href}
+              className={`p-5 rounded-2xl border-2 transition-all hover:shadow-md ${year.color} flex flex-col justify-between`}
             >
-              <span className="absolute top-4 right-4 bg-slate-100 text-slate-500 text-xs font-medium px-2.5 py-1 rounded-full">
-                Soon
-              </span>
-
-              <div className="space-y-3 text-center mt-2">
-                <div className="text-6xl grayscale group-hover:grayscale-0 transition">
-                  {item.icon}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-3xl">{year.icon}</span>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                    {year.age}
+                  </span>
                 </div>
-                <h2 className="text-2xl font-bold text-slate-700">{item.year}</h2>
-                <p className="text-slate-500 text-sm">Coming Soon</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-1">
+                  {year.title}
+                </h2>
+                <p className="text-slate-500 text-xs sm:text-sm mb-5 leading-relaxed">{year.desc}</p>
               </div>
 
-              <div className="mt-6 w-full bg-slate-100 text-slate-400 font-semibold py-2.5 px-4 rounded-xl text-center text-sm cursor-not-allowed">
-                Locked 🔒
-              </div>
+              <Link
+                href={year.href}
+                className={`w-full py-2.5 text-center text-white text-sm font-semibold rounded-xl shadow-xs transition block ${year.btnColor}`}
+              >
+                Explore Topics ➔
+              </Link>
             </div>
           ))}
-
-        </section>
-
-        {/* --- FOOTER --- */}
-        <footer className="text-center pt-8 border-t border-slate-200 text-slate-500 text-sm">
-          © {new Date().getFullYear()} FrankInstant Edu | Online Primary Maths Practice
-        </footer>
-
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="text-center text-xs font-medium text-slate-400 py-4 border-t border-slate-200">
+        © {new Date().getFullYear()} Frankinstant-Edu. All rights reserved.
+      </footer>
     </main>
   );
 }
