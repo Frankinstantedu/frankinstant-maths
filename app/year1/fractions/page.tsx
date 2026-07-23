@@ -38,25 +38,42 @@ export default function FractionsPage() {
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [message, setMessage] = useState("");
+  const [answered, setAnswered] = useState(false);
 
   function checkAnswer() {
-    if (answer.toLowerCase() === question.answer.toLowerCase()) {
-      setScore(score + 1);
-      setMessage("Correct! 🎉");
+    if (answered) return;
+
+    if (
+      answer.trim().toLowerCase() ===
+      question.answer.toLowerCase()
+    ) {
+      setScore((prev) => prev + 1);
+      setMessage("✅ Correct!");
     } else {
-      setMessage(`Try again. The answer is ${question.answer}`);
+      setMessage(`❌ Incorrect. The answer is ${question.answer}`);
     }
+
+    setAnswered(true);
   }
 
   function nextQuestion() {
-    if (questionNumber < TOTAL_QUESTIONS) {
+    if (!answered) return;
+
+    if (questionNumber >= TOTAL_QUESTIONS) {
       setQuestion(generateQuestion());
-      setQuestionNumber(questionNumber + 1);
+      setQuestionNumber(1);
+      setScore(0);
       setAnswer("");
-      setMessage("");
-    } else {
-      setMessage(`Finished! Your score is ${score}/${TOTAL_QUESTIONS}`);
+      setMessage("🎉 Great job! Starting a new round...");
+      setAnswered(false);
+      return;
     }
+
+    setQuestion(generateQuestion());
+    setQuestionNumber((prev) => prev + 1);
+    setAnswer("");
+    setMessage("");
+    setAnswered(false);
   }
 
   return (
@@ -69,28 +86,29 @@ export default function FractionsPage() {
       question={question.question}
       message={message}
     >
-
       <input
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
+        disabled={answered}
         className="border-2 border-gray-300 rounded-lg p-3 text-xl w-full"
         placeholder="Enter answer"
       />
 
       <button
         onClick={checkAnswer}
-        className="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 w-full"
+        disabled={answered}
+        className="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 w-full disabled:opacity-50"
       >
         Check Answer
       </button>
 
       <button
         onClick={nextQuestion}
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 w-full"
+        disabled={!answered}
+        className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 w-full disabled:opacity-50"
       >
         Next Question
       </button>
-
     </QuizLayout>
   );
 }

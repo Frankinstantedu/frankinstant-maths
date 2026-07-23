@@ -21,24 +21,41 @@ export default function AdditionPage() {
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
   const [message, setMessage] = useState("");
+  const [answered, setAnswered] = useState(false);
 
   function checkAnswer() {
+    if (answered) return;
+
     if (Number(answer) === question.answer) {
-      setScore(score + 1);
-      setMessage("Correct! 🎉");
+      setScore((prev) => prev + 1);
+      setMessage("✅ Correct!");
     } else {
-      setMessage(`Try again. The answer is ${question.answer}`);
+      setMessage(`❌ Incorrect. The answer is ${question.answer}`);
     }
+
+    setAnswered(true);
   }
 
   function nextQuestion() {
+    if (!answered) return;
+
     if (questionNumber < TOTAL_QUESTIONS) {
       setQuestion(generateQuestion());
-      setQuestionNumber(questionNumber + 1);
+      setQuestionNumber((prev) => prev + 1);
       setAnswer("");
       setMessage("");
+      setAnswered(false);
     } else {
-      setMessage(`Finished! Your score is ${score}/${TOTAL_QUESTIONS}`);
+      setMessage(`🎉 Round Complete! Score: ${score}/${TOTAL_QUESTIONS}`);
+
+      setTimeout(() => {
+        setQuestion(generateQuestion());
+        setQuestionNumber(1);
+        setScore(0);
+        setAnswer("");
+        setMessage("");
+        setAnswered(false);
+      }, 2000);
     }
   }
 
@@ -52,31 +69,30 @@ export default function AdditionPage() {
       question={question.question}
       message={message}
     >
-
       <input
         type="number"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         className="border-2 border-gray-300 rounded-lg p-3 text-xl w-full"
         placeholder="Enter answer"
+        disabled={answered}
       />
-
 
       <button
         onClick={checkAnswer}
-        className="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 w-full"
+        disabled={answered}
+        className="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 w-full disabled:opacity-50"
       >
         Check Answer
       </button>
 
-
       <button
         onClick={nextQuestion}
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 w-full"
+        disabled={!answered}
+        className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4 w-full disabled:opacity-50"
       >
         Next Question
       </button>
-
     </QuizLayout>
   );
 }
