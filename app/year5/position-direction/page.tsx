@@ -71,10 +71,9 @@ function generateQuestion(): Question {
       const endIndex = (startIndex + chosenTurn.offset) % 4;
       const endDir = directions[endIndex];
 
-    
-      questionText = `Facing ${startDir}, you make a ${chosen.turn} turn. Which direction are you facing now?`;
+      questionText = `Facing ${startDir}, you make a ${chosenTurn.turn} turn. Which direction are you facing now?`;
       correct = endDir;
-      explanationText = `Turning ${chosen.turn} from ${startDir} brings you to face ${endDir}.`;
+      explanationText = `Turning ${chosenTurn.turn} from ${startDir} brings you to face ${endDir}.`;
       wrongAnswers = directions.filter(d => d !== endDir).slice(0, 3);
       break;
     }

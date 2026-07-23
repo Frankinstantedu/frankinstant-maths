@@ -39,7 +39,7 @@ function generateQuestion(): Question {
     case 1: {
       const baseNums = [
         { num: 3, den: 4, mult: 3, resNum: 9, resDen: 12 },
-        { num: 2, altDen: 5, mult: 4, resNum: 8, resDen: 20 },
+        { num: 2, den: 5, mult: 4, resNum: 8, resDen: 20 },
         { num: 1, den: 2, mult: 7, resNum: 7, resDen: 14 },
         { num: 3, den: 5, mult: 3, resNum: 9, resDen: 15 },
       ];
