@@ -2,20 +2,31 @@
 
 import { useState, useEffect } from "react";
 
+export type YearStats = {
+  quizzesTaken?: number;
+  correctAnswers?: number;
+  correct?: number;
+  total?: number;
+};
+
 export type UserProfile = {
   name: string;
   avatar: string;
-  totalQuizzesTaken: number;
-  totalCorrectAnswers: number;
   streakDays: number;
+  streak?: number;
+  pin?: string;
+  totalCorrect?: number;
+  totalQuizzes?: number;
+  years: {
+    [key: string]: YearStats;
+  };
 };
 
 const DEFAULT_PROFILE: UserProfile = {
   name: "Math Explorer",
   avatar: "🎓",
-  totalQuizzesTaken: 0,
-  totalCorrectAnswers: 0,
   streakDays: 1,
+  years: {},
 };
 
 export function useUserProfile() {
@@ -32,18 +43,6 @@ export function useUserProfile() {
     }
   }, []);
 
-  const updateStats = (correctCount: number) => {
-    setProfile((prev) => {
-      const updated = {
-        ...prev,
-        totalQuizzesTaken: prev.totalQuizzesTaken + 1,
-        totalCorrectAnswers: prev.totalCorrectAnswers + correctCount,
-      };
-      localStorage.setItem("frankinstant_profile", JSON.stringify(updated));
-      return updated;
-    });
-  };
-
   const updateProfileDetails = (newName: string, newAvatar: string) => {
     setProfile((prev) => {
       const updated = { ...prev, name: newName, avatar: newAvatar };
@@ -52,5 +51,5 @@ export function useUserProfile() {
     });
   };
 
-  return { profile, updateStats, updateProfileDetails };
+  return { profile, updateProfileDetails };
 }
