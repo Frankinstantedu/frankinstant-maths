@@ -121,15 +121,17 @@ export default function ProfilePage() {
             </div>
           ) : (
             Object.entries(profile.years).map(([yearName, stats]) => {
-              const totalPossible = stats.quizzesTaken * 10;
-              const accuracy = totalPossible > 0 ? Math.round((stats.correctAnswers / totalPossible) * 100) : 0;
+              const quizzesTaken = stats.quizzesTaken ?? stats.correct ?? 0;
+              const correctAnswers = stats.correctAnswers ?? stats.correct ?? 0;
+              const totalPossible = quizzesTaken * 10;
+              const accuracy = totalPossible > 0 ? Math.round((correctAnswers / totalPossible) * 100) : 0;
               
               return (
                 <div key={yearName} className="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
                   <h4 className="text-lg font-bold text-indigo-600 mb-3">{yearName} Curriculum</h4>
                   <div className="grid grid-cols-3 gap-2 text-center">
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <div className="text-xl font-black text-slate-800">{stats.quizzesTaken}</div>
+                      <div className="text-xl font-black text-slate-800">{quizzesTaken}</div>
                       <div className="text-[10px] font-bold text-slate-400 uppercase">Quizzes</div>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
@@ -137,7 +139,7 @@ export default function ProfilePage() {
                       <div className="text-[10px] font-bold text-slate-400 uppercase">Accuracy</div>
                     </div>
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <div className="text-xl font-black text-slate-800">{stats.correctAnswers}</div>
+                      <div className="text-xl font-black text-slate-800">{correctAnswers}</div>
                       <div className="text-[10px] font-bold text-slate-400 uppercase">Correct</div>
                     </div>
                   </div>
