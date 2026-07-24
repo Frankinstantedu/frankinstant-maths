@@ -13,7 +13,7 @@ export default function Home() {
           <div className="relative">
             <button 
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 hover:border-indigo-500 text-slate-700 font-bold rounded-xl text-sm transition shadow-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 hover:border-indigo-500 text-slate-700 font-bold rounded-xl text-sm transition shadow-sm cursor-pointer"
             >
               <span>👤</span>
               <span>Student</span>
@@ -22,7 +22,8 @@ export default function Home() {
             {menuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl py-2 z-50">
                 <a href="/profile" className="block px-4 py-2 text-sm text-slate-700 hover:bg-indigo-50">Profile</a>
-                <button className="block w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50">Logout</button>
+                <a href="/times-table" className="block px-4 py-2 text-sm text-slate-700 hover:bg-indigo-50">Times Tables</a>
+                <button className="block w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 cursor-pointer">Logout</button>
               </div>
             )}
           </div>
