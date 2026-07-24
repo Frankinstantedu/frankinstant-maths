@@ -1,6 +1,20 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Home() {
+  const router = useRouter();
+
+  // Protect the dashboard: Redirect to /login if not authenticated
+  useEffect(() => {
+    const isAuth = sessionStorage.getItem("frankinstant_authenticated");
+    if (!isAuth) {
+      router.push("/login");
+    }
+  }, [router]);
+
   const years = [
     {
       title: "Year 1 Maths",
@@ -47,12 +61,43 @@ export default function Home() {
       color: "border-rose-200 hover:border-rose-400 bg-white shadow-xs",
       btnColor: "bg-rose-600 hover:bg-rose-700",
     },
+    {
+      title: "Year 6 Maths",
+      age: "Age 10-11",
+      icon: "🎓",
+      desc: "Advanced SATs preparation, algebra, ratio, proportion, and four operations.",
+      href: "/year6",
+      color: "border-indigo-200 hover:border-indigo-400 bg-white shadow-xs",
+      btnColor: "bg-indigo-600 hover:bg-indigo-700",
+    },
+    {
+      title: "Times Tables (1-12)",
+      age: "All Ages",
+      icon: "✖️",
+      desc: "Interactive multiplication practice for every table from 1 to 12.",
+      href: "/times-tables",
+      color: "border-teal-200 hover:border-teal-400 bg-white shadow-xs",
+      btnColor: "bg-teal-600 hover:bg-teal-700",
+    },
   ];
 
   return (
     <main className="min-h-screen bg-slate-50 p-4 sm:p-6 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
       <div className="max-w-4xl mx-auto w-full pt-2">
         
+        {/* Top Header Navigation with Profile Link */}
+        <div className="flex items-center justify-between mb-6">
+          <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
+            Frankinstant-Edu Portal
+          </span>
+          <Link
+            href="/profile"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 border-2 border-indigo-200 hover:border-indigo-500 text-indigo-700 font-bold rounded-xl text-sm transition shadow-2xs"
+          >
+            👤 My Profile & Stats
+          </Link>
+        </div>
+
         {/* Stylish Brand Header */}
         <div className="text-center mb-8">
           <span className="inline-block text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 shadow-2xs">
@@ -68,7 +113,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Year Selection Grid */}
+        {/* Year Selection & Times Tables Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8">
           {years.map((year) => (
             <div
