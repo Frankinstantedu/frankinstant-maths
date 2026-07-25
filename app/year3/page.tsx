@@ -7,8 +7,8 @@ export default function Year3Hub() {
       icon: "📈",
       desc: "3-digit addition and subtraction practice.",
       href: "/year3/addition-subtraction",
-      color: "border-emerald-200 hover:border-emerald-500 bg-emerald-50/50",
-      btnColor: "bg-emerald-600 hover:bg-emerald-700",
+      color: "border-emerald-500/40 hover:border-emerald-400 bg-emerald-950/40",
+      btnColor: "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30",
       badge: "📈 Calculations",
     },
     {
@@ -16,8 +16,8 @@ export default function Year3Hub() {
       icon: "✖️",
       desc: "Master 3x, 4x, and 8x tables and division facts.",
       href: "/year3/multiplication-division",
-      color: "border-amber-200 hover:border-amber-500 bg-amber-50/50",
-      btnColor: "bg-amber-600 hover:bg-amber-700",
+      color: "border-amber-500/40 hover:border-amber-400 bg-amber-950/40",
+      btnColor: "bg-amber-600 hover:bg-amber-500 shadow-amber-600/30",
       badge: "⚡ Multiplication",
     },
     {
@@ -25,8 +25,8 @@ export default function Year3Hub() {
       icon: "🍕",
       desc: "Fractions of amounts, equivalence, and addition/subtraction.",
       href: "/year3/fractions",
-      color: "border-sky-200 hover:border-sky-500 bg-sky-50/50",
-      btnColor: "bg-sky-600 hover:bg-sky-700",
+      color: "border-sky-500/40 hover:border-sky-400 bg-sky-950/40",
+      btnColor: "bg-sky-600 hover:bg-sky-500 shadow-sky-600/30",
       badge: "🍕 Fractions",
     },
     {
@@ -34,8 +34,8 @@ export default function Year3Hub() {
       icon: "🔢",
       desc: "3-digit numbers, partitioning, and counting in steps.",
       href: "/year3/place-value",
-      color: "border-purple-200 hover:border-purple-500 bg-purple-50/50",
-      btnColor: "bg-purple-600 hover:bg-purple-700",
+      color: "border-purple-500/40 hover:border-purple-400 bg-purple-950/40",
+      btnColor: "bg-purple-600 hover:bg-purple-500 shadow-purple-600/30",
       badge: "🔢 Place Value",
     },
     {
@@ -43,8 +43,8 @@ export default function Year3Hub() {
       icon: "⏰",
       desc: "Clocks, length, mass, capacity, and perimeters.",
       href: "/year3/measurement-time",
-      color: "border-rose-200 hover:border-rose-500 bg-rose-50/50",
-      btnColor: "bg-rose-600 hover:bg-rose-700",
+      color: "border-rose-500/40 hover:border-rose-400 bg-rose-950/40",
+      btnColor: "bg-rose-600 hover:bg-rose-500 shadow-rose-600/30",
       badge: "⏰ Measurement",
     },
     {
@@ -52,8 +52,8 @@ export default function Year3Hub() {
       icon: "📐",
       desc: "2D/3D shape properties, angles, and line types.",
       href: "/year3/shapes-geometry",
-      color: "border-teal-200 hover:border-teal-500 bg-teal-50/50",
-      btnColor: "bg-teal-600 hover:bg-teal-700",
+      color: "border-teal-500/40 hover:border-teal-400 bg-teal-950/40",
+      btnColor: "bg-teal-600 hover:bg-teal-500 shadow-teal-600/30",
       badge: "📐 Geometry",
     },
     {
@@ -61,32 +61,38 @@ export default function Year3Hub() {
       icon: "📊",
       desc: "Bar charts, pictograms, tally charts, and data tables.",
       href: "/year3/statistics",
-      color: "border-indigo-200 hover:border-indigo-500 bg-indigo-50/50",
-      btnColor: "bg-indigo-600 hover:bg-indigo-700",
+      color: "border-indigo-500/40 hover:border-indigo-400 bg-indigo-950/40",
+      btnColor: "bg-indigo-600 hover:bg-indigo-500 shadow-indigo-600/30",
       badge: "📊 Data",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
-      <div className="max-w-4xl mx-auto">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-100 p-4 sm:p-8 relative overflow-hidden selection:bg-indigo-500 selection:text-white">
+      
+      {/* Decorative Background Glow Elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/3 right-10 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 left-1/3 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <div>
             <Link
-              href="/"
-              className="text-sm font-bold text-slate-500 hover:text-slate-800 transition"
+              href="/classes"
+              className="text-sm font-bold text-teal-400 hover:underline transition"
             >
               ← Back to Main Menu
             </Link>
-            <h1 className="text-3xl font-extrabold text-slate-900 mt-2">
+            <h1 className="text-3xl sm:text-4xl font-black text-white mt-2 tracking-tight">
               Year 3 Maths Hub 🚀
             </h1>
-            <p className="text-slate-600">
+            <p className="text-slate-300 text-sm mt-1">
               Pick a topic to start practicing key Year 3 skills!
             </p>
           </div>
-          <div className="text-5xl">📚</div>
+          <div className="text-5xl bg-slate-900/80 p-3 rounded-2xl border border-slate-700/80 shadow-lg backdrop-blur-md">📚</div>
         </div>
 
         {/* Topics Grid */}
@@ -94,24 +100,24 @@ export default function Year3Hub() {
           {topics.map((topic) => (
             <div
               key={topic.href}
-              className={`p-6 rounded-3xl border-2 transition-all shadow-sm hover:shadow-md ${topic.color} flex flex-col justify-between`}
+              className={`p-6 rounded-3xl border-2 transition-all shadow-xl backdrop-blur-xl ${topic.color} flex flex-col justify-between hover:shadow-2xl`}
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-4xl">{topic.icon}</span>
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-900/80 text-slate-300 border border-slate-700 shadow-md">
                     {topic.badge}
                   </span>
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 mb-2">
+                <h2 className="text-xl font-bold text-white mb-2">
                   {topic.title}
                 </h2>
-                <p className="text-slate-600 text-sm mb-6">{topic.desc}</p>
+                <p className="text-slate-300 text-sm mb-6 leading-relaxed">{topic.desc}</p>
               </div>
 
               <Link
                 href={topic.href}
-                className={`w-full py-3 text-center text-white font-bold rounded-xl shadow-sm transition block ${topic.btnColor}`}
+                className={`w-full py-3 text-center text-white font-bold rounded-xl shadow-lg transition block ${topic.btnColor}`}
               >
                 Start Practice ➔
               </Link>
