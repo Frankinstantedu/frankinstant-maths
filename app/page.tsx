@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,6 +60,7 @@ export default function Home() {
               <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-xl">
                 <a href="/profile" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Profile</a>
                 <a href="/times-table" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Times Tables</a>
+                <a href="/whiteboard" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Whiteboard ✏️</a>
                 <button className="block w-full text-left px-4 py-2 text-sm text-rose-400 hover:bg-rose-950/40 transition cursor-pointer">Logout</button>
               </div>
             )}
@@ -87,13 +89,16 @@ export default function Home() {
         <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-10 border border-slate-700/80 shadow-2xl text-center mb-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl"></div>
           <h2 className="text-3xl font-black text-white mb-6">Ready to learn today?</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <a href="/classes" className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-indigo-600/30">
               Select Class →
             </a>
             <a href="/times-table" className="px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-teal-600/30">
               Practice Times Tables ✖️
             </a>
+            <Link href="/whiteboard" className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-sky-600/30 flex items-center gap-2">
+              <span>Interactive Whiteboard</span> <span>✏️</span>
+            </Link>
           </div>
         </div>
 
