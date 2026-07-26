@@ -33,7 +33,6 @@ export default function Home() {
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Replace 'FRANK2026' with whatever temporary or permanent subscriber password you wish to issue
     if (accessPassword.trim() === 'FRANK2026') {
       setIsSubscribed(true);
       localStorage.setItem('frankinstant_subscribed', 'true');
@@ -65,17 +64,17 @@ export default function Home() {
       bgGradient: "from-teal-500 to-indigo-600",
       textColor: "text-slate-950",
       icon: "⚡",
-      locked: false // Free preview tool
+      locked: false
     },
     {
       title: "English Spelling Bee",
       description: "Practice primary curriculum word banks with audio & definitions.",
       badge: "🔤 Vocabulary",
-      href: "/spelling-bee",
+      href: "/spelling",
       bgGradient: "from-amber-500 to-orange-600",
       textColor: "text-slate-950",
       icon: "🔤",
-      locked: true // Subscriber-only tool example
+      locked: true
     },
     {
       title: "Select Class",
@@ -175,7 +174,7 @@ export default function Home() {
     },
     {
       q: "Are tutoring sessions in-person or online?",
-      a: "We offer both flexible options depending on your preference and location around Joensuu, Finland."
+      a: "We offer both flexible options depending on your preference and location."
     }
   ];
 
@@ -250,7 +249,7 @@ export default function Home() {
                   <div className="my-1 border-t border-slate-800"></div>
                   <div className="px-4 py-1 text-xs font-bold text-slate-400 uppercase tracking-wider">Ready to Learn</div>
                   <Link href="/drill" className="block px-4 py-2 text-sm text-teal-400 font-bold hover:bg-teal-600/30 hover:text-white transition">⚡ Speed Drill Game</Link>
-                  <Link href="/spelling-bee" className="block px-4 py-2 text-sm text-amber-400 font-bold hover:bg-amber-600/30 hover:text-white transition">🔤 English Spelling Bee { !isSubscribed && '🔒' }</Link>
+                  <Link href="/spelling" className="block px-4 py-2 text-sm text-amber-400 font-bold hover:bg-amber-600/30 hover:text-white transition">🔤 English Spelling Bee { !isSubscribed && '🔒' }</Link>
                   <a href="/classes" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">🎓 Select Class { !isSubscribed && '🔒' }</a>
                   <a href="/times-table" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">✖️ Practice Times Tables</a>
                   <Link href="/sat-practice" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">📚 Practice Question Bank { !isSubscribed && '🔒' }</Link>
@@ -277,7 +276,7 @@ export default function Home() {
             Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-teal-400">Frankinstant-Edu</span>
           </h1>
           <p className="text-slate-300 text-base max-w-lg mx-auto font-medium mb-6">
-            Comprehensive primary school tutoring, homework support, and interactive learning tools based in Joensuu, Finland.
+            Comprehensive primary school tutoring, homework support, and interactive learning tools.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <button
@@ -380,7 +379,7 @@ export default function Home() {
             <div className="md:col-span-2 space-y-4 text-slate-300 text-sm sm:text-base font-medium">
               <h4 className="text-lg font-bold text-white">Dedicated to Building Academic Confidence</h4>
               <p>
-                Hello! I am Frank, the founder and lead tutor behind Frankinstant-Edu. Based right here in Joensuu, Finland, I combine a strong professional background in management and operations with a deep passion for primary school education, skill building, and academic success.
+                Hello! I am Frank, the founder and lead tutor behind Frankinstant-Edu. I combine a strong professional background in management and operations with a deep passion for primary school education, skill building, and academic success.
               </p>
               <p>
                 My approach focuses on making learning structured, engaging, and stress-free across all core subjects. Whether your child needs help with school assignments, literacy, language practice, problem-solving, or general study habits, I am here to help them succeed.
@@ -388,7 +387,6 @@ export default function Home() {
               <div className="pt-2 flex flex-wrap gap-2">
                 <span className="px-3 py-1 bg-indigo-950/80 text-indigo-300 font-bold text-xs rounded-xl border border-indigo-800/60">Primary Curriculum Support</span>
                 <span className="px-3 py-1 bg-indigo-950/80 text-indigo-300 font-bold text-xs rounded-xl border border-indigo-800/60">1-on-1 Coaching</span>
-                <span className="px-3 py-1 bg-teal-950/80 text-teal-300 font-bold text-xs rounded-xl border border-teal-800/60">Joensuu, Finland</span>
               </div>
             </div>
           </div>
@@ -416,25 +414,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Testimonials Section */}
-        <div className="bg-gradient-to-r from-indigo-950/60 via-slate-900/80 to-teal-950/60 border border-indigo-500/30 rounded-3xl p-8 mb-12 shadow-2xl backdrop-blur-xl">
-          <h3 className="text-xl font-bold text-white mb-6 text-center">What Parents Say</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-slate-900/80 p-6 rounded-2xl shadow-lg border border-slate-700/80 flex flex-col justify-between">
-              <p className="text-slate-300 text-sm italic mb-4">
-                "My daughter's overall school performance and study confidence improved tremendously after just a few weeks of personalized tutoring. Highly recommended!"
-              </p>
-              <span className="text-xs font-bold text-teal-400 uppercase tracking-wider">— Parent in Joensuu</span>
-            </div>
-            <div className="bg-slate-900/80 p-6 rounded-2xl shadow-lg border border-slate-700/80 flex flex-col justify-between">
-              <p className="text-slate-300 text-sm italic mb-4">
-                "The interactive practice tools combined with expert general guidance made learning fun and structured for my son. Excellent service."
-              </p>
-              <span className="text-xs font-bold text-teal-400 uppercase tracking-wider">— Primary School Parent</span>
-            </div>
-          </div>
-        </div>
-
         {/* FAQ Section */}
         <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/80 shadow-2xl mb-12">
           <h3 className="text-xl font-bold text-white mb-6 text-center">Frequently Asked Questions</h3>
@@ -458,48 +437,30 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Info & Contact Section */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-indigo-900 to-indigo-950 text-white rounded-3xl p-8 shadow-2xl border border-indigo-700/60 flex flex-col justify-between">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Our Mission</h3>
-              <p className="text-indigo-200 text-sm leading-relaxed mb-6">
-                To provide accessible, high-quality educational resources and guidance that empower every child to reach their full potential.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-indigo-800/80">
-              <span className="text-xs font-bold text-teal-300 uppercase tracking-wider block mb-1">Based in Joensuu</span>
-              <p className="text-xs text-indigo-200">Private & group tutoring tailored for primary school success.</p>
+        {/* Contact & Subscriptions */}
+        <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/80 shadow-2xl flex flex-col justify-between">
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4">Contact & Subscriptions</h3>
+            <div className="text-slate-300 text-sm space-y-3 font-medium mb-6">
+              <p>📞 Phone: +358 449564467</p>
+              <p>✉️ Email: frankinstantedu@gmail.com</p>
             </div>
           </div>
-
-          <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/80 shadow-2xl flex flex-col justify-between">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">Contact & Subscriptions</h3>
-              <div className="text-slate-300 text-sm space-y-3 font-medium mb-6">
-                <p>📞 Phone: +358 449564467</p>
-                <p>✉️ Email: frankinstantedu@gmail.com</p>
-                <p>📍 Address: Joensuu, Finland</p>
-              </div>
-            </div>
-
-            {/* Instant Action Buttons for Parents */}
-            <div className="space-y-2">
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="w-full py-3 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-slate-950 font-bold text-center rounded-xl text-sm transition shadow-lg cursor-pointer"
-              >
-                📅 Subscribe & Schedule Consultation
-              </button>
-              <a 
-                href="https://wa.me/358449564467?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20unlock%20all%20features." 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center rounded-xl text-sm transition shadow-lg shadow-emerald-600/30"
-              >
-                💬 Chat on WhatsApp to Subscribe
-              </a>
-            </div>
+          <div className="space-y-2">
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="w-full py-3 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-slate-950 font-bold text-center rounded-xl text-sm transition shadow-lg cursor-pointer"
+            >
+              📅 Subscribe & Schedule Consultation
+            </button>
+            <a 
+              href="https://wa.me/358449564467?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20unlock%20all%20features." 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center rounded-xl text-sm transition shadow-lg shadow-emerald-600/30"
+            >
+              💬 Chat on WhatsApp to Subscribe
+            </a>
           </div>
         </div>
 
@@ -548,19 +509,6 @@ export default function Home() {
                   Unlock Features
                 </button>
               </div>
-
-              <div className="text-center pt-2">
-                <p className="text-xs text-slate-400">
-                  Don't have a password yet?{' '}
-                  <button 
-                    type="button" 
-                    onClick={() => { setIsPasswordModalOpen(false); setIsBookingOpen(true); }}
-                    className="text-teal-400 font-bold hover:underline cursor-pointer"
-                  >
-                    Subscribe with Frank
-                  </button>
-                </p>
-              </div>
             </form>
           </div>
         </div>
@@ -578,7 +526,7 @@ export default function Home() {
             </button>
             <div className="mb-6">
               <h3 className="text-2xl font-black text-white">Subscribe & Book</h3>
-              <p className="text-xs text-slate-400 mt-1">Fill out the details below to subscribe and receive your access password or schedule a consultation!</p>
+              <p className="text-xs text-slate-400 mt-1">Fill out the details below to subscribe and receive your access password!</p>
             </div>
 
             <form className="space-y-4">
@@ -600,68 +548,66 @@ export default function Home() {
                   <select 
                     value={childGrade}
                     onChange={(e) => setChildGrade(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
+                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
                   >
-                    <option>Grade 1</option>
-                    <option>Grade 2</option>
-                    <option>Grade 3</option>
-                    <option>Grade 4</option>
-                    <option>Grade 5</option>
-                    <option>Grade 6</option>
+                    <option value="Grade 1">Grade 1</option>
+                    <option value="Grade 2">Grade 2</option>
+                    <option value="Grade 3">Grade 3</option>
+                    <option value="Grade 4">Grade 4</option>
+                    <option value="Grade 5">Grade 5</option>
+                    <option value="Grade 6">Grade 6</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Subject Focus</label>
-                  <select 
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 cursor-pointer"
-                  >
-                    <option>Primary School Curriculum & Homework</option>
-                    <option>General Academic Support</option>
-                    <option>English Spelling & Reading</option>
-                    <option>Numbers & Arithmetic</option>
-                    <option>General 1-on-1 Coaching</option>
-                  </select>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Preferred Date</label>
+                  <input 
+                    type="date" 
+                    value={preferredDate}
+                    onChange={(e) => setPreferredDate(e.target.value)}
+                    className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Preferred Date / Time</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Next Tuesday afternoon"
-                  value={preferredDate}
-                  onChange={(e) => setPreferredDate(e.target.value)}
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Subject Focus</label>
+                <select 
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                   className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
-                />
+                >
+                  <option value="Primary School Curriculum & Homework Support">General Curriculum & Homework Support</option>
+                  <option value="Mathematics & Numerical Skills">Mathematics & Numerical Skills</option>
+                  <option value="English Literacy & Spelling">English Literacy & Spelling</option>
+                  <option value="Study Habits & Confidence">Study Habits & Confidence</option>
+                </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Additional Notes (Optional)</label>
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Additional Notes</label>
                 <textarea 
                   rows={2}
-                  placeholder="Any specific topics, subjects, or assignments your child needs help with..."
+                  placeholder="Any specific topics or goals..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
                 ></textarea>
               </div>
 
-              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 pt-2">
                 <button 
                   type="button"
                   onClick={handleWhatsAppBooking}
-                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center rounded-xl text-sm transition shadow-lg shadow-emerald-600/30 cursor-pointer flex items-center justify-center gap-2"
+                  className="py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm transition shadow-lg text-center cursor-pointer"
                 >
-                  <span>💬</span> Send via WhatsApp
+                  💬 Send via WhatsApp
                 </button>
                 <button 
                   type="button"
                   onClick={handleEmailBooking}
-                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-center rounded-xl text-sm transition shadow-lg shadow-indigo-600/30 cursor-pointer flex items-center justify-center gap-2"
+                  className="py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs sm:text-sm transition shadow-lg text-center cursor-pointer"
                 >
-                  <span>✉️</span> Send via Email
+                  ✉️ Send via Email
                 </button>
               </div>
             </form>
