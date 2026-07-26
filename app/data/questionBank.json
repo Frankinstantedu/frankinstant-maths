@@ -1,0 +1,52 @@
+[
+  {
+    "id": "pv-001",
+    "topic": "Number and Place Value",
+    "subtopic": "Value of each digit",
+    "difficulty": "Medium",
+    "question": "What is the value of the digit 7 in the number 4,723,891?",
+    "options": ["70,000", "700,000", "7,000,000", "7,000"],
+    "correctAnswer": "700,000",
+    "explanation": "The 7 is in the hundred-thousands place, so its value is 700,000."
+  },
+  {
+    "id": "pv-002",
+    "topic": "Number and Place Value",
+    "subtopic": "Round to nearest 10,000",
+    "difficulty": "Medium",
+    "question": "Round 483,215 to the nearest 10,000.",
+    "options": ["480,000", "490,000", "483,000", "500,000"],
+    "correctAnswer": "480,000",
+    "explanation": "Look at the thousands digit (3). Since it is less than 5, round down to 480,000."
+  },
+  {
+    "id": "add-001",
+    "topic": "Addition",
+    "subtopic": "Column addition",
+    "difficulty": "Easy",
+    "question": "Calculate 4,582 + 3,241",
+    "options": ["7,723", "7,823", "7,813", "7,733"],
+    "correctAnswer": "7,823",
+    "explanation": "2+1=3, 8+4=12 (write 2, carry 1), 5+2+1=8, 4+3=7. Total is 7,823."
+  },
+  {
+    "id": "alg-001",
+    "topic": "Algebra",
+    "subtopic": "Solve two-step equations",
+    "difficulty": "Medium",
+    "question": "Solve for x: 3x + 5 = 20",
+    "options": ["x = 5", "x = 6", "x = 7", "x = 8"],
+    "correctAnswer": "x = 5",
+    "explanation": "Subtract 5 from both sides: 3x = 15. Divide by 3: x = 5."
+  },
+  {
+    "id": "geom-001",
+    "topic": "Geometry",
+    "subtopic": "Angles",
+    "difficulty": "Easy",
+    "question": "What do the interior angles in a triangle always add up to?",
+    "options": ["90°", "180°", "270°", "360°"],
+    "correctAnswer": "180°",
+    "explanation": "The angles in any triangle always sum to a straight line, which is 180°."
+  }
+]

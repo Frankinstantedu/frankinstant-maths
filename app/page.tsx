@@ -60,6 +60,7 @@ export default function Home() {
               <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-xl">
                 <a href="/profile" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Profile</a>
                 <a href="/times-table" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Times Tables</a>
+                <a href="/sat-practice" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Practice Bank 📚</a>
                 <a href="/whiteboard" className="block px-4 py-2 text-sm text-slate-300 hover:bg-indigo-600/30 hover:text-white transition">Whiteboard ✏️</a>
                 <button className="block w-full text-left px-4 py-2 text-sm text-rose-400 hover:bg-rose-950/40 transition cursor-pointer">Logout</button>
               </div>
@@ -96,6 +97,9 @@ export default function Home() {
             <a href="/times-table" className="px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-teal-600/30">
               Practice Times Tables ✖️
             </a>
+            <Link href="/sat-practice" className="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-emerald-600/30 flex items-center gap-2">
+              <span>Practice Question Bank</span> <span>📚</span>
+            </Link>
             <Link href="/whiteboard" className="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-black text-base rounded-2xl transition shadow-lg shadow-sky-600/30 flex items-center gap-2">
               <span>Interactive Whiteboard</span> <span>✏️</span>
             </Link>
