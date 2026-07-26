@@ -17,7 +17,8 @@ export default function ParentRegistrationPage() {
       parentEmail: formData.get('parentEmail'),
       parentPhone: formData.get('parentPhone'),
       childName: formData.get('childName'),
-      curriculumGroup: formData.get('curriculumGroup'),
+      childAge: formData.get('childAge'),
+      childClass: formData.get('childClass'),
       notes: formData.get('notes'),
     };
 
@@ -125,30 +126,43 @@ export default function ParentRegistrationPage() {
               <div className="space-y-4 pt-4">
                 <h2 className="text-lg font-bold text-slate-800 border-b pb-2">Child Information</h2>
 
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                    Child's Full Name
+                  </label>
+                  <input
+                    required
+                    name="childName"
+                    type="text"
+                    placeholder="e.g. Leo Jenkins"
+                    className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Child's Full Name
+                      Child's Age
                     </label>
                     <input
                       required
-                      name="childName"
-                      type="text"
-                      placeholder="e.g. Leo Jenkins"
+                      name="childAge"
+                      type="number"
+                      placeholder="e.g. 9"
                       className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Curriculum Group
+                      Child's Class / Year
                     </label>
-                    <select
-                      name="curriculumGroup"
-                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 bg-white text-sm"
-                    >
-                      <option value="Year 3 & 4">Year 3 & 4 (Ages 7-9)</option>
-                      <option value="Year 5 & 6">Year 5 & 6 (Ages 9-11)</option>
-                    </select>
+                    <input
+                      required
+                      name="childClass"
+                      type="text"
+                      placeholder="e.g. Year 4"
+                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
+                    />
                   </div>
                 </div>
 
