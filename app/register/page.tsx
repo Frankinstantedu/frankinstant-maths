@@ -1,201 +1,84 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
 
-export default function ParentRegistrationPage() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string>('');
+import { useState } from "react";
+import Link from "next/link";
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+export default function RegisterPage() {
+  const [clientName, setClientName] = useState("");
+  const [serviceInterest, setServiceInterest] = useState("Primary Mathematics Practice");
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('submitting');
-    setErrorMessage('');
+    if (!clientName.trim()) return;
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      parentName: formData.get('parentName'),
-      parentEmail: formData.get('parentEmail'),
-      parentPhone: formData.get('parentPhone'),
-      childName: formData.get('childName'),
-      childAge: formData.get('childAge'),
-      childClass: formData.get('childClass'),
-      notes: formData.get('notes'),
-    };
+    // Your WhatsApp number with country code (no + or spaces needed for wa.me links)
+    const phoneNumber = "358449564467";
 
-    try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+    // Format the message that will automatically appear in your WhatsApp chat
+    const message = `Hi Frankinstant-Edu, my name is ${clientName}. I just filled out the registration form and I'm interested in: ${serviceInterest}. Let's get started!`;
 
-      const result = await response.json();
+    // Encode the message for a URL
+    const encodedMessage = encodeURIComponent(message);
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit registration.');
-      }
-
-      setStatus('success');
-    } catch (error: any) {
-      setStatus('error');
-      setErrorMessage(error.message || 'Something went wrong. Please try again later.');
-    }
+    // Redirect the user directly to WhatsApp
+    window.location.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
-          >
-            ← Back to Home
+    <main className="min-h-screen bg-slate-950 text-slate-100 p-6 flex flex-col items-center justify-center">
+      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl flex flex-col items-center">
+        
+        <div className="w-full flex justify-between items-center mb-6">
+          <Link href="/" className="text-xs font-bold text-teal-400 hover:underline">
+            ← Hub
           </Link>
+          <span className="text-xs font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20 px-3 py-1 rounded-full">
+            Frankinstant-Edu
+          </span>
         </div>
 
-        <div className="bg-white shadow-xl rounded-2xl p-6 sm:p-10 border border-slate-100">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              Parent & Child Registration 📝
-            </h1>
-            <p className="mt-2 text-sm text-slate-600">
-              Please fill out the form below to register. Details will be sent directly to our administration team.
-            </p>
+        <h1 className="text-2xl font-black text-white mb-1 text-center">📝 Quick Registration</h1>
+        <p className="text-xs text-slate-400 text-center mb-6">Connect with us instantly on WhatsApp</p>
+
+        <form onSubmit={handleSubmit} className="w-full flex flex-col space-y-4">
+          <div>
+            <label className="block text-xs font-bold text-slate-300 mb-1">Your Name / Parent Name</label>
+            <input
+              type="text"
+              required
+              placeholder="e.g., Sarah Johnson"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-teal-500 transition"
+            />
           </div>
 
-          {status === 'success' ? (
-            <div className="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl text-center space-y-4">
-              <h3 className="text-lg font-bold text-emerald-800">Registration Successful! 🎉</h3>
-              <p className="text-sm text-emerald-700">
-                Thank you for registering. We have received your details and will get in touch with you shortly.
-              </p>
-              <button
-                onClick={() => setStatus('idle')}
-                className="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-all"
-              >
-                Register Another Child
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-4">
-                <h2 className="text-lg font-bold text-slate-800 border-b pb-2">Parent / Guardian Information</h2>
-                
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                    Parent's Full Name
-                  </label>
-                  <input
-                    required
-                    name="parentName"
-                    type="text"
-                    placeholder="e.g. Sarah Jenkins"
-                    className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                  />
-                </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-300 mb-1">What are you registering for?</label>
+            <select
+              value={serviceInterest}
+              onChange={(e) => setServiceInterest(e.target.value)}
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-teal-500 transition"
+            >
+              <option value="Primary Mathematics Practice & Resources">Primary Mathematics Practice & Resources</option>
+              <option value="60-Second Speed Drill Access">60-Second Speed Drill Access</option>
+              <option value="General Tutoring Inquiry">General Tutoring Inquiry</option>
+            </select>
+          </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Email Address
-                    </label>
-                    <input
-                      required
-                      name="parentEmail"
-                      type="email"
-                      placeholder="sarah@example.com"
-                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      required
-                      name="parentPhone"
-                      type="tel"
-                      placeholder="+44 7123 456789"
-                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
+          <button
+            type="submit"
+            className="w-full mt-4 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-900/20 transition text-sm cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>💬 Continue to WhatsApp</span>
+          </button>
+        </form>
 
-              <div className="space-y-4 pt-4">
-                <h2 className="text-lg font-bold text-slate-800 border-b pb-2">Child Information</h2>
+        <p className="text-[11px] text-slate-500 text-center mt-6">
+          No spam emails, no waiting. Clicking this opens your WhatsApp and messages us directly.
+        </p>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                    Child's Full Name
-                  </label>
-                  <input
-                    required
-                    name="childName"
-                    type="text"
-                    placeholder="e.g. Leo Jenkins"
-                    className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Child's Age
-                    </label>
-                    <input
-                      required
-                      name="childAge"
-                      type="number"
-                      placeholder="e.g. 9"
-                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                      Child's Class / Year
-                    </label>
-                    <input
-                      required
-                      name="childClass"
-                      type="text"
-                      placeholder="e.g. Year 4"
-                      className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                    Additional Notes or Requirements (Optional)
-                  </label>
-                  <textarea
-                    name="notes"
-                    rows={3}
-                    placeholder="Any specific learning focuses or health notes..."
-                    className="w-full py-3 px-4 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-0 text-slate-800 text-sm"
-                  ></textarea>
-                </div>
-              </div>
-
-              {errorMessage && (
-                <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-sm text-center">
-                  {errorMessage}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="w-full py-4 rounded-xl bg-indigo-600 text-white font-semibold text-base hover:bg-indigo-700 active:scale-[0.99] transition-all shadow-md shadow-indigo-200 disabled:bg-indigo-300"
-              >
-                {status === 'submitting' ? 'Submitting Registration...' : 'Complete Registration 🚀'}
-              </button>
-            </form>
-          )}
-        </div>
       </div>
-    </div>
+    </main>
   );
 }

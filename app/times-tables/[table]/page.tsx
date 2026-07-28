@@ -16,19 +16,8 @@ export default function TablePracticePage() {
 
     return multipliers.map((multiplier) => {
       const correctAnswer = tableNum * multiplier;
-      
-      const wrongOptions = new Set<number>();
-      while (wrongOptions.size < 3) {
-        const offset = Math.floor(Math.random() * 5) + 1;
-        const wrong = Math.random() > 0.5 ? correctAnswer + offset : Math.max(0, correctAnswer - offset);
-        if (wrong !== correctAnswer) wrongOptions.add(wrong);
-      }
-
-      const options = [correctAnswer, ...Array.from(wrongOptions)].sort(() => Math.random() - 0.5);
-
       return {
         question: `What is ${tableNum} × ${multiplier}?`,
-        options,
         answer: correctAnswer,
         explanation: `${tableNum} multiplied by ${multiplier} equals ${correctAnswer}.`,
       };
@@ -36,7 +25,7 @@ export default function TablePracticePage() {
   }, [tableNum]);
 
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [userAnswer, setUserAnswer] = useState("");
   const [score, setScore] = useState(0);
   
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -45,21 +34,40 @@ export default function TablePracticePage() {
 
   const currentQ = questions[currentQuestionIdx];
 
-  function handleOptionClick(option: number) {
-    if (selectedOption !== null) return;
-    setSelectedOption(option);
+  const handleNumberInput = (numStr: string) => {
+    if (showFeedbackModal || showEndModal) return;
+    setUserAnswer((prev) => {
+      if (prev.length >= 4) return prev; // Limit max digits
+      return prev + numStr;
+    });
+  };
 
-    const correct = option === currentQ.answer;
+  const handleClear = () => {
+    if (showFeedbackModal || showEndModal) return;
+    setUserAnswer("");
+  };
+
+  const handleBackspace = () => {
+    if (showFeedbackModal || showEndModal) return;
+    setUserAnswer((prev) => prev.slice(0, -1));
+  };
+
+  const handleSubmitAnswer = () => {
+    if (!userAnswer || showFeedbackModal || showEndModal) return;
+
+    const parsed = Number(userAnswer);
+    const correct = parsed === currentQ.answer;
+
     setIsCorrect(correct);
     if (correct) {
       setScore((prev) => prev + 1);
     }
     setShowFeedbackModal(true);
-  }
+  };
 
   function handleNextQuestion() {
     setShowFeedbackModal(false);
-    setSelectedOption(null);
+    setUserAnswer("");
 
     if (currentQuestionIdx + 1 < questions.length) {
       setCurrentQuestionIdx((prev) => prev + 1);
@@ -71,7 +79,7 @@ export default function TablePracticePage() {
   function handleRestartQuiz() {
     setCurrentQuestionIdx(0);
     setScore(0);
-    setSelectedOption(null);
+    setUserAnswer("");
     setShowEndModal(false);
   }
 
@@ -91,31 +99,65 @@ export default function TablePracticePage() {
       showEndModal={showEndModal}
       onRestartQuiz={handleRestartQuiz}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {currentQ.options.map((option, idx) => {
-          let btnStyle = "bg-slate-50 border-slate-200 hover:border-indigo-500 text-slate-800";
-          
-          if (selectedOption !== null) {
-            if (option === currentQ.answer) {
-              btnStyle = "bg-emerald-500 border-emerald-600 text-white font-bold";
-            } else if (option === selectedOption) {
-              btnStyle = "bg-rose-500 border-rose-600 text-white font-bold";
-            } else {
-              btnStyle = "bg-slate-100 border-slate-200 text-slate-400 opacity-50";
-            }
-          }
+      <div className="flex flex-col items-center space-y-6">
+        {/* Answer Display Box */}
+        <div className="w-full max-w-xs bg-slate-50 border-2 border-slate-200 rounded-2xl py-4 px-6 text-center shadow-xs">
+          <span className="text-xs font-bold text-slate-400 block uppercase tracking-wider mb-1">Your Answer</span>
+          <span className="text-3xl font-black text-indigo-600 tracking-wide min-h-[40px] inline-block">
+            {userAnswer || "_"}
+          </span>
+        </div>
 
-          return (
+        {/* Permanent On-Screen Number Pad (Matching Speed Drill Style) */}
+        <div className="w-full max-w-xs bg-white border border-slate-200 rounded-3xl p-4 shadow-xl">
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => handleNumberInput(num.toString())}
+                disabled={showFeedbackModal || showEndModal}
+                className="py-3 bg-slate-100 hover:bg-indigo-50 active:scale-95 disabled:opacity-40 text-slate-800 text-lg font-bold rounded-xl transition border border-slate-200 shadow-2xs cursor-pointer"
+              >
+                {num}
+              </button>
+            ))}
             <button
-              key={idx}
-              onClick={() => handleOptionClick(option)}
-              disabled={selectedOption !== null}
-              className={`p-4 rounded-2xl border-2 text-lg font-bold transition shadow-xs cursor-pointer ${btnStyle}`}
+              type="button"
+              onClick={handleClear}
+              disabled={showFeedbackModal || showEndModal}
+              className="py-3 bg-rose-50 hover:bg-rose-100 disabled:opacity-40 text-rose-700 text-xs font-bold rounded-xl transition border border-rose-200 cursor-pointer"
             >
-              {option}
+              Clear
             </button>
-          );
-        })}
+            <button
+              type="button"
+              onClick={() => handleNumberInput("0")}
+              disabled={showFeedbackModal || showEndModal}
+              className="py-3 bg-slate-100 hover:bg-indigo-50 active:scale-95 disabled:opacity-40 text-slate-800 text-lg font-bold rounded-xl transition border border-slate-200 shadow-2xs cursor-pointer"
+            >
+              0
+            </button>
+            <button
+              type="button"
+              onClick={handleBackspace}
+              disabled={showFeedbackModal || showEndModal}
+              className="py-3 bg-amber-50 hover:bg-amber-100 disabled:opacity-40 text-amber-700 text-xs font-bold rounded-xl transition border border-amber-200 cursor-pointer"
+            >
+              ⌫ Del
+            </button>
+          </div>
+
+          {/* Submit Check Button */}
+          <button
+            type="button"
+            onClick={handleSubmitAnswer}
+            disabled={showFeedbackModal || showEndModal || !userAnswer}
+            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 disabled:opacity-40 text-white font-bold rounded-xl transition shadow-md shadow-indigo-200 cursor-pointer text-sm"
+          >
+            Check Answer ↵
+          </button>
+        </div>
       </div>
     </QuizLayout>
   );
