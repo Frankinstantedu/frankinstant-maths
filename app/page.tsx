@@ -104,6 +104,11 @@ export default function Home() {
     }
   ];
 
+  // WhatsApp link generator for SAT Prep booking
+  const satPhoneNumber = "358449564467";
+  const satMessage = "Hi Frankinstant-Edu, I am interested in joining the Special Group SAT Maths Preparatory Class. Please send me the details and schedule.";
+  const satWhatsappUrl = `https://wa.me/${satPhoneNumber}?text=${encodeURIComponent(satMessage)}`;
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-100 p-4 sm:p-6 pb-20 relative overflow-hidden selection:bg-indigo-500 selection:text-white">
       
@@ -250,6 +255,41 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        {/* SAT Maths Preparatory Class Promo Section */}
+        <section className="w-full mb-12 p-6 sm:p-8 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 border border-indigo-500/30 rounded-3xl shadow-2xl relative overflow-hidden">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col text-center md:text-left">
+              <span className="inline-block w-fit mx-auto md:mx-0 text-xs font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full mb-3">
+                🎯 Specialized Coaching
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
+                Group SAT Maths Prep Class
+              </h2>
+              <p className="text-sm text-slate-300 max-w-xl leading-relaxed">
+                Master core mathematical concepts, tackle high-difficulty problem-solving, and boost your exam scores with our intensive small-group preparatory sessions.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end gap-3 shrink-0">
+              <div className="text-center md:text-right">
+                <span className="text-[11px] text-slate-400 block">Limited spots per group</span>
+                <span className="text-xs font-bold text-emerald-400">Enrollment Open Now</span>
+              </div>
+
+              <a
+                href={satWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-900/20 transition text-sm flex items-center gap-2 cursor-pointer"
+              >
+                <span>💬 Book via WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* Meet Your Tutor Section */}
         <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-8 sm:p-10 border border-slate-700/80 shadow-2xl mb-12">
