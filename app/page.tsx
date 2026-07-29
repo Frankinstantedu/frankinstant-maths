@@ -169,8 +169,8 @@ export default function Home() {
         </div>
 
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="w-full h-64 mb-8 rounded-3xl overflow-hidden shadow-2xl border border-slate-700/80 relative bg-slate-800">
+        <div className="text-center mb-8">
+          <div className="w-full h-52 mb-6 rounded-3xl overflow-hidden shadow-2xl border border-slate-700/80 relative bg-slate-800">
             <img 
               src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200" 
               alt="Books and Apple" 
@@ -178,21 +178,48 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-white mb-4 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">
             Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-teal-400">Frankinstant-Edu</span>
           </h1>
-          <p className="text-slate-300 text-base max-w-lg mx-auto font-medium mb-6">
+          <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto font-medium">
             Comprehensive primary school tutoring, homework support, and interactive learning tools.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/register"
-              className="px-8 py-3 bg-gradient-to-r from-teal-400 to-indigo-500 hover:from-teal-300 hover:to-indigo-400 text-slate-950 font-black rounded-2xl text-base transition shadow-xl shadow-teal-500/20"
-            >
-              📝 Register Now 🚀
-            </Link>
-          </div>
         </div>
+
+        {/* SAT Maths Preparatory Class Promo Section (Moved to First Glance) */}
+        <section className="w-full mb-10 p-6 sm:p-8 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 border border-indigo-500/40 rounded-3xl shadow-2xl relative overflow-hidden ring-2 ring-indigo-500/20">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col text-center md:text-left">
+              <span className="inline-block w-fit mx-auto md:mx-0 text-xs font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full mb-3">
+                🔥 Featured Program • Enrollment Open
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
+                Special Group SAT Maths Prep Class
+              </h2>
+              <p className="text-sm text-slate-300 max-w-xl leading-relaxed">
+                Master core mathematical concepts, tackle high-difficulty problem-solving, and boost your exam scores with our intensive small-group preparatory sessions.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end gap-3 shrink-0">
+              <div className="text-center md:text-right">
+                <span className="text-[11px] text-slate-400 block">Limited spots per group</span>
+                <span className="text-xs font-bold text-emerald-400">Secure Your Spot</span>
+              </div>
+
+              <a
+                href={satWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-900/20 transition text-sm flex items-center gap-2 cursor-pointer"
+              >
+                <span>💬 Book via WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* Rotating Flash / Swipe Banner Section */}
         <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl text-center mb-12 relative overflow-hidden">
@@ -255,41 +282,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-
-        {/* SAT Maths Preparatory Class Promo Section */}
-        <section className="w-full mb-12 p-6 sm:p-8 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 border border-indigo-500/30 rounded-3xl shadow-2xl relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex flex-col text-center md:text-left">
-              <span className="inline-block w-fit mx-auto md:mx-0 text-xs font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full mb-3">
-                🎯 Specialized Coaching
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                Group SAT Maths Prep Class
-              </h2>
-              <p className="text-sm text-slate-300 max-w-xl leading-relaxed">
-                Master core mathematical concepts, tackle high-difficulty problem-solving, and boost your exam scores with our intensive small-group preparatory sessions.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center md:items-end gap-3 shrink-0">
-              <div className="text-center md:text-right">
-                <span className="text-[11px] text-slate-400 block">Limited spots per group</span>
-                <span className="text-xs font-bold text-emerald-400">Enrollment Open Now</span>
-              </div>
-
-              <a
-                href={satWhatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-lg shadow-emerald-900/20 transition text-sm flex items-center gap-2 cursor-pointer"
-              >
-                <span>💬 Book via WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </section>
 
         {/* Meet Your Tutor Section */}
         <div className="bg-slate-900/70 backdrop-blur-xl rounded-3xl p-8 sm:p-10 border border-slate-700/80 shadow-2xl mb-12">
